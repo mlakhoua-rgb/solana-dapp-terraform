@@ -1,10 +1,13 @@
-# Solana dApp AWS Infrastructure as Code
+# Solana dApp - AWS Terraform Infrastructure
 
 [![Terraform](https://img.shields.io/badge/Terraform-1.6+-623CE4?logo=terraform)](https://www.terraform.io/)
 [![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazon-aws)](https://aws.amazon.com/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/mlakhoua-rgb/solana-dapp-terraform/actions)
 [![Security](https://img.shields.io/badge/Security-Checkov%20%7C%20tfsec-success)](https://www.checkov.io/)
+[![GitHub stars](https://img.shields.io/github/stars/mlakhoua-rgb/solana-dapp-terraform?style=social)](https://github.com/mlakhoua-rgb/solana-dapp-terraform/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/mlakhoua-rgb/solana-dapp-terraform?style=social)](https://github.com/mlakhoua-rgb/solana-dapp-terraform/network/members)
+[![AI-Augmented](https://img.shields.io/badge/AI--Augmented-Manus%20AI-blueviolet)](https://www.manus.im/)
 
 **AI-Augmented Infrastructure as Code: Demonstrating Strategic Leadership in DevOps**
 
