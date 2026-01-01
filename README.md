@@ -6,9 +6,47 @@
 [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/mlakhoua-rgb/solana-dapp-terraform/actions)
 [![Security](https://img.shields.io/badge/Security-Checkov%20%7C%20tfsec-success)](https://www.checkov.io/)
 
-Production-ready Terraform configuration for deploying the Solana dApp on AWS. This Infrastructure-as-Code (IaC) solution provides a scalable, secure, and highly available architecture for hosting Web2 components of the Solana dApp.
+**AI-Augmented Infrastructure as Code: Demonstrating Strategic Leadership in DevOps**
+
+This repository showcases how experienced infrastructure leaders can orchestrate AI agents as collaborators for hands-on Terraform development while maintaining human ownership of production environments. The project demonstrates production-ready IaC practices developed with AI assistance (Manus AI, Claude, Gemini) for accelerated development, comprehensive testing, and automated security validation—all under strategic human oversight.
+
+**Purpose:** Demonstrate controlled integration of AI agents into Infrastructure and DevOps workflows, where technical leaders guide AI-assisted code development, reviews, and documentation while retaining accountability for production deployments and governance.
 
 **Repository**: [https://github.com/mlakhoua-rgb/solana-dapp-terraform](https://github.com/mlakhoua-rgb/solana-dapp-terraform)
+
+---
+
+## 🤖 AI-Augmented Development Approach
+
+### Human-AI Collaboration Model
+
+This infrastructure was developed using an **orchestrated AI collaboration model** where experienced infrastructure leaders leverage AI agents for specific technical tasks while maintaining strategic oversight and production governance.
+
+**AI Agents Used:**
+- **Manus AI**: Primary agent for hands-on Terraform development, module creation, and infrastructure design
+- **Claude**: Code review, architecture validation, security best practices, and technical documentation
+- **Gemini**: Data analysis, cost optimization insights, and monitoring strategy
+- **Perplexity**: Research on AWS best practices, Terraform patterns, and industry standards
+- **ChatGPT**: Rapid prototyping, troubleshooting, and problem-solving
+
+**Human Oversight:**
+- Strategic architecture decisions and trade-off analysis
+- Production deployment approval and governance
+- Security policy definition and compliance validation
+- Cost management and budget accountability
+- Team coordination and stakeholder communication
+
+### DevOps Best Practices with AI Integration
+
+As DevOps and SRE professionals are **production environment owners, not developers**, this repository demonstrates how AI agents can be integrated into workflows for:
+
+- **Automated Code Reviews**: AI-assisted validation of Terraform syntax, security, and best practices
+- **Documentation Generation**: AI-augmented creation of architecture diagrams and technical documentation
+- **Security Scanning**: Automated security analysis with Checkov and tfsec, human-reviewed exceptions
+- **Testing Automation**: AI-assisted test case generation with human validation
+- **Continuous Improvement**: AI-powered analysis of infrastructure metrics and optimization recommendations
+
+**Key Principle**: Experienced tech leaders orchestrate AI agents and human teams, maintaining accountability for production environments that should never be owned by non-humans.
 
 ---
 
@@ -501,6 +539,10 @@ For issues, questions, or suggestions:
 
 ---
 
-**Built with ❤️ by Manus AI**
+**Developed with AI-Augmented Leadership**
+
+This repository demonstrates how experienced infrastructure leaders can orchestrate AI agents (Manus AI, Claude, Gemini, Perplexity, ChatGPT) as collaborators for hands-on IaC development while maintaining human ownership of production environments and strategic decision-making.
+
+**Created by:** Mohamed Ben Lakhoua | [LinkedIn](https://www.linkedin.com/in/benlakhoua/) | [GitHub](https://github.com/mlakhoua-rgb)
 
 *Last Updated: January 2026*
