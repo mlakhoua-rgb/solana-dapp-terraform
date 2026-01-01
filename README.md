@@ -1,5 +1,11 @@
 # Solana dApp AWS Infrastructure as Code
 
+[![Terraform](https://img.shields.io/badge/Terraform-1.6+-623CE4?logo=terraform)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-Cloud-FF9900?logo=amazon-aws)](https://aws.amazon.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-2088FF?logo=github-actions)](https://github.com/mlakhoua-rgb/solana-dapp-terraform/actions)
+[![Security](https://img.shields.io/badge/Security-Checkov%20%7C%20tfsec-success)](https://www.checkov.io/)
+
 Production-ready Terraform configuration for deploying the Solana dApp on AWS. This Infrastructure-as-Code (IaC) solution provides a scalable, secure, and highly available architecture for hosting Web2 components of the Solana dApp.
 
 **Repository**: [https://github.com/mlakhoua-rgb/solana-dapp-terraform](https://github.com/mlakhoua-rgb/solana-dapp-terraform)
@@ -9,6 +15,8 @@ Production-ready Terraform configuration for deploying the Solana dApp on AWS. T
 ## 🏗️ Architecture Overview
 
 The Terraform configuration deploys a complete AWS infrastructure with the following components:
+
+![Architecture Diagram](ARCHITECTURE.png)
 
 ### Network Layer
 - **VPC** with configurable CIDR blocks
@@ -49,9 +57,10 @@ The Terraform configuration deploys a complete AWS infrastructure with the follo
 ## 📋 Prerequisites
 
 ### Required Tools
-- **Terraform**: Version 1.0 or higher
+- **Terraform**: Version 1.6 or higher
 - **AWS CLI**: Version 2.x
 - **Git**: For version control
+- **Pre-commit** (optional): For automated code quality checks
 
 ### AWS Account Requirements
 - AWS account with appropriate permissions
@@ -81,7 +90,6 @@ cd solana-dapp-terraform
 ```
 
 ### 2. Configure AWS Credentials
-
 ```bash
 # Option 1: Using AWS CLI
 aws configure
@@ -178,9 +186,13 @@ solana-dapp-terraform/
 │       ├── variables.tf
 │       ├── outputs.tf
 │       └── terraform.tfvars.example
-├── scripts/                          # Helper scripts
 ├── .github/workflows/                # GitHub Actions workflows
-│   └── terraform-deploy.yml
+│   └── terraform-ci.yml              # CI/CD pipeline
+├── .pre-commit-config.yaml           # Pre-commit hooks
+├── .tflint.hcl                       # TFLint configuration
+├── ARCHITECTURE.mmd                  # Architecture diagram (Mermaid)
+├── ARCHITECTURE.png                  # Architecture diagram (PNG)
+├── CHANGELOG.md                      # Version history
 ├── README.md                         # This file
 ├── DEPLOYMENT.md                     # Deployment guide
 ├── MODULES.md                        # Module documentation
@@ -190,7 +202,6 @@ solana-dapp-terraform/
 ---
 
 ## 🔧 Configuration
-
 ### Environment Variables
 
 Create a `terraform.tfvars` file in each environment directory:
@@ -277,7 +288,6 @@ terraform {
 ---
 
 ## 🔐 Security Best Practices
-
 ### Network Security
 - Private subnets for EC2 instances
 - NAT Gateway for secure outbound access
@@ -357,7 +367,6 @@ Access dashboards in AWS Console:
 - View metrics for ALB, EC2, CloudFront, and S3
 
 ### CloudWatch Alarms
-
 Configured alarms:
 - **ALB CPU Utilization**: Alert when > 70%
 - **ALB Unhealthy Hosts**: Alert when > 0
@@ -401,30 +410,51 @@ Subscribe to SNS topic notifications:
 
 ### GitHub Actions Workflow
 
-The `.github/workflows/terraform-deploy.yml` workflow:
+The `.github/workflows/terraform-ci.yml` workflow:
 1. Validates Terraform syntax on every push
 2. Plans changes on pull requests
-3. Applies changes to dev on merge to main
-4. Runs security scans with Checkov
-5. Estimates infrastructure costs
+3. Applies changes to dev on merge to develop branch
+4. Applies changes to prod on merge to main branch
+5. Runs security scans with Checkov and tfsec
+6. Estimates infrastructure costs with Infracost
 
 ### Setting Up CI/CD
 
 1. Add AWS credentials to GitHub Secrets:
    - `AWS_ACCESS_KEY_ID`
    - `AWS_SECRET_ACCESS_KEY`
+   - `AWS_ACCESS_KEY_ID_PROD` (for production)
+   - `AWS_SECRET_ACCESS_KEY_PROD` (for production)
+   - `INFRACOST_API_KEY` (optional, for cost estimation)
 
 2. Workflow automatically triggers on:
-   - Push to main branch
-   - Pull requests to main branch
+   - Push to main or develop branch
+   - Pull requests to main or develop branch
+
+### Pre-commit Hooks
+
+Install pre-commit hooks for local validation:
+
+```bash
+# Install pre-commit
+pip install pre-commit
+
+# Install hooks
+pre-commit install
+
+# Run manually
+pre-commit run --all-files
+```
 
 ---
 
 ## 📚 Additional Documentation
 
+- **[ARCHITECTURE.md](ARCHITECTURE.md)**: Detailed architecture documentation with diagrams
 - **[DEPLOYMENT.md](DEPLOYMENT.md)**: Detailed deployment guide
 - **[MODULES.md](MODULES.md)**: Module-by-module documentation
 - **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)**: Common issues and solutions
+- **[CHANGELOG.md](CHANGELOG.md)**: Version history and release notes
 
 ---
 
@@ -446,6 +476,7 @@ For more troubleshooting, see [TROUBLESHOOTING.md](TROUBLESHOOTING.md).
 ---
 
 ## 🤝 Contributing
+
 
 Contributions are welcome! Please:
 1. Fork the repository
@@ -472,4 +503,4 @@ For issues, questions, or suggestions:
 
 **Built with ❤️ by Manus AI**
 
-*Last Updated: December 2025*
+*Last Updated: January 2026*

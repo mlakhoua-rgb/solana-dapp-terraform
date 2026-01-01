@@ -1,0 +1,97 @@
+graph TB
+    subgraph "Internet"
+        Users[Users/Clients]
+    end
+
+    subgraph "AWS Cloud"
+        subgraph "CloudFront CDN"
+            CF[CloudFront Distribution]
+        end
+
+        subgraph "VPC - 10.0.0.0/16"
+            subgraph "Public Subnets"
+                IGW[Internet Gateway]
+                ALB[Application Load Balancer]
+                NAT1[NAT Gateway AZ-1]
+                NAT2[NAT Gateway AZ-2]
+            end
+
+            subgraph "Private Subnets - AZ-1"
+                EC2_1[EC2 Instance 1<br/>Solana dApp]
+            end
+
+            subgraph "Private Subnets - AZ-2"
+                EC2_2[EC2 Instance 2<br/>Solana dApp]
+            end
+
+            subgraph "Auto Scaling"
+                ASG[Auto Scaling Group<br/>Min: 1, Max: 6]
+            end
+        end
+
+        subgraph "Storage"
+            S3[S3 Bucket<br/>Static Assets]
+        end
+
+        subgraph "Security"
+            SG_ALB[Security Group - ALB<br/>80/443 from Internet]
+            SG_EC2[Security Group - EC2<br/>80 from ALB only]
+            IAM[IAM Role<br/>EC2 → S3 Access]
+        end
+
+        subgraph "Monitoring"
+            CW_Logs[CloudWatch Logs]
+            CW_Alarms[CloudWatch Alarms]
+            CW_Dashboard[CloudWatch Dashboard]
+            SNS[SNS Topic<br/>Email Alerts]
+            VPC_Logs[VPC Flow Logs]
+        end
+    end
+
+    %% User Flow
+    Users -->|HTTPS| CF
+    CF -->|Static Assets| S3
+    CF -->|Dynamic Content| ALB
+    
+    %% Network Flow
+    ALB -->|Route Traffic| EC2_1
+    ALB -->|Route Traffic| EC2_2
+    
+    %% Internet Access
+    IGW -->|Inbound| ALB
+    EC2_1 -->|Outbound| NAT1
+    EC2_2 -->|Outbound| NAT2
+    NAT1 -->|Internet| IGW
+    NAT2 -->|Internet| IGW
+    
+    %% Auto Scaling
+    ASG -.->|Manages| EC2_1
+    ASG -.->|Manages| EC2_2
+    
+    %% Storage Access
+    EC2_1 -->|Read/Write| S3
+    EC2_2 -->|Read/Write| S3
+    
+    %% Security
+    SG_ALB -.->|Protects| ALB
+    SG_EC2 -.->|Protects| EC2_1
+    SG_EC2 -.->|Protects| EC2_2
+    IAM -.->|Permissions| EC2_1
+    IAM -.->|Permissions| EC2_2
+    
+    %% Monitoring
+    ALB -->|Metrics| CW_Logs
+    EC2_1 -->|Logs| CW_Logs
+    EC2_2 -->|Logs| CW_Logs
+    CW_Logs -->|Trigger| CW_Alarms
+    CW_Alarms -->|Notify| SNS
+    CW_Logs -->|Visualize| CW_Dashboard
+    VPC_Logs -.->|Network Traffic| CW_Logs
+
+    style Users fill:#14F195,stroke:#333,stroke-width:2px
+    style CF fill:#FF9900,stroke:#333,stroke-width:2px
+    style ALB fill:#FF9900,stroke:#333,stroke-width:2px
+    style EC2_1 fill:#FF9900,stroke:#333,stroke-width:2px
+    style EC2_2 fill:#FF9900,stroke:#333,stroke-width:2px
+    style S3 fill:#569A31,stroke:#333,stroke-width:2px
+    style CW_Dashboard fill:#FF4F8B,stroke:#333,stroke-width:2px
